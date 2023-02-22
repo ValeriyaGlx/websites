@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="assets/favicon.ico" rel="shortcut icon" />
+  <link rel="stylesheet" href="css/owfont-regular.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <title>momentum</title>
+</head>
+<body>
+  <header class="header">
+    <div class="player">
+      <div class="player-controls">
+        <button class="play-prev player-icon"></button>
+        <button class="play player-icon"></button>
+        <button class="play-next player-icon"></button>
+      </div>
+      <ul class="play-list"></ul>
+    </div>
+    <div class="weather">
+      <input type="text" class="city" value = 'Minsk' placeholder="[Enter City]"/>
+      <i class="weather-icon owf"></i>
+      <div class="weather-error"></div>
+      <div class="description-container">
+        <span class="temperature"></span>
+        <span class="weather-description"></span>
+      </div>
+      <div class="wind"></div>
+      <div class="humidity"></div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="slider-icons">
+      <button class="slide-prev slider-icon"></button>
+      <button class="slide-next slider-icon"></button>
+    </div>
+    <time class="time"></time>
+    <date class="date"></date>
+    <div class="greeting-container">
+      <span class="greeting"></span>
+      <input type="text" class="name" placeholder="[Enter Name]"  />
+    </div>
+  </main>
+
+<footer class="footer">
+  <div class="settings">
+
+    <div class="settings__main">
+      <ul>
+        <li class="settings__li">
+          <div class="settings__li--lang">
+          <span class="language">Language:</span>
+          <div  class="settings__li--langButt">
+            <button class="lang__button button__active">En</button>
+            <button class="lang__button" id="ru">Ru</button>
+          </div>
+        </div>
+        </li>
+       
+        <li class="settings__li ">
+          <div class="settings__li--images">
+          <span class="sourse">Image Sourсe:</span>
+          <div class="settings__li--imagesButt">
+            <button class="sourse__button button__active" id="gitHub" onclick="getLinkFromGitHub()">GitHub</button>
+            <button class="sourse__button" id="unsplash" onclick="getLinkFromUnplash">Unsplash</button>
+            <button class="sourse__button" id="flickr" onclick="getLinkFromFlickr()">Flickr</button>
+            <input type="text" class="sourse__input" placeholder="Choose a Theme" autofocus/>
+          </div> 
+        </div>
+        </li>
+       
+        <div class="article">Hide/Show Blocks:</div>
+
+        <li class="settings__li">
+          <span class="settings__span">Clock</span> 
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </li>
+
+        <li class="settings__li">
+         <span class="settings__span"> Date</span>
+         <label class="switch">
+          <input type="checkbox" checked>
+          <span class="slider"></span>
+        </label>
+        </li>
+
+        <li class="settings__li">
+          <span class="settings__span">Greeting</span>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </li>
+
+        <li class="settings__li">
+         <span class="settings__span">Weather</span>
+         <label class="switch">
+          <input type="checkbox" checked>
+          <span class="slider"></span>
+        </label>
+        </li>
+
+        <li class="settings__li">
+          <span class="settings__span">Quotes</span>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </li>
+
+        <li class="settings__li">
+          <span class="settings__span">Todo</span>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </li>
+
+        <li class="settings__li">
+          <span class="settings__span">Audio</span>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </li>
+      </ul>
+    </div>
+
+  
+  <button class="footer__settings"></button>
+  </div>
+
+
+  <div class="footer__quote">
+    <button class="change-quote"></button>
+    <div class="quotes">
+      <div class="quote"></div>
+      <div class="author"></div>
+    </div>
+  </div>
+
+  <div class="todo__main">
+    <div class="todo__list">
+      <p class="todo-p">Add a todo to get srarted</p>
+
+      <div class="todo__task-field">
+        <template id="task-template">
+         <div class="todo__task">
+         <label class="todo__task-checkbox">
+            <input type="checkbox">
+            <div></div>
+         </label>
+         <div class="todo__task-text"></div>
+         <button  class="todo__task-delete"></button>
+         </div>
+         </template> 
+    </div>
+
+
+      
+      <button class="todo__list--button">New Todo</button>
+      <p class="todo__add"></p>
+      <input type="text" class="todo__input" placeholder="New Todo" autofocus />
+    </div>
+    <button class="footer__todo">Todo</button>
+  </div>
+</footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
