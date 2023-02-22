@@ -1,7 +1,7 @@
 
 # MOMENTUM ⌚
 
-:point_right: DESCRIPTION:  This is a analog of the same name Google Chrome Application from **RS School course**
+:point_right: DESCRIPTION:  This is an analog of the same name Google Chrome Application from **RS School course**
 
 :page_facing_up: INSTUCTION: 
 > Users are able:
