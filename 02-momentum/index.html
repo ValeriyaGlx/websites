@@ -10,14 +10,57 @@
 </head>
 <body>
   <header class="header">
+
     <div class="player">
       <div class="player-controls">
         <button class="play-prev player-icon"></button>
         <button class="play player-icon"></button>
         <button class="play-next player-icon"></button>
       </div>
-      <ul class="play-list"></ul>
+   
+    <div class="audio-player">
+      <div class="timeline">
+        <div class="progress"></div>
+      </div>
+     <div class="controls">
+
+      <div class="player-time">
+        <div class="current">0:00</div>
+        <div class="divider">/</div>
+        <div class="length">0:00</div>
+      </div>
+
+      <div class="player-name--size">
+      <div class="player-name"></div>
     </div>
+
+      <div class="volume-container">
+        <div class="volume-button">
+          <div class="volume icono-volumeMedium"></div>
+        </div>
+        
+        <div class="volume-slider">
+          <div class="volume-percentage"></div>
+        </div>
+      </div>
+
+
+    </div>
+    </div>
+
+      
+
+   
+
+      <ul class="play-list">
+        <li class="play-list__li">Aqua Caelestis</li>
+        <li class="play-list__li">River Flows In You</li>
+        <li class="play-list__li">Summer Wind</li>
+        <li class="play-list__li">Ennio Morricone</li>
+      </ul>
+    </div>
+
+
     <div class="weather">
       <input type="text" class="city" value = 'Minsk' placeholder="[Enter City]"/>
       <i class="weather-icon owf"></i>
@@ -60,9 +103,9 @@
        
         <li class="settings__li ">
           <div class="settings__li--images">
-          <span class="sourse">Image Sourсe:</span>
+          <span class="sourse">Image Source:</span>
           <div class="settings__li--imagesButt">
-            <button class="sourse__button button__active" id="gitHub" onclick="getLinkFromGitHub()">GitHub</button>
+            <button class="sourse__button button__active" id="gitHub" onclick="setBG()">GitHub</button>
             <button class="sourse__button" id="unsplash" onclick="getLinkFromUnplash">Unsplash</button>
             <button class="sourse__button" id="flickr" onclick="getLinkFromFlickr()">Flickr</button>
             <input type="text" class="sourse__input" placeholder="Choose a Theme" autofocus/>
@@ -171,5 +214,6 @@
 </footer>
 
   <script src="js/script.js"></script>
+  <script src="js/audio.js"></script>
 </body>
 </html>

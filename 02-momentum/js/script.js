@@ -231,6 +231,8 @@ const settings = document.querySelector('.settings__main')
 
 
 footerSettings.addEventListener('click', () => {
+  getLinkFromFlickr()
+  //getLinkFromUnplash()
   
   if(settings.style.maxHeight){
     settings.style.padding = null;
@@ -380,14 +382,25 @@ function chooseSourse(e){
   } else {
     inputSourse.style.opacity = 0
   }
+if(e.target.id==='gitHub'){
+  setBG()
+}
+
+if(e.target.id==='flickr'){
+  setBG(linkFl)
+}
+
+if(e.target.id==='unsplash'){
+  setBG(UPlink)
+}
+
+
 }
 
 //input sourse
 let theme = 'nature'
 inputSourse.addEventListener('change', () => {
-  theme = inputSourse.value;
-  
-  return theme;
+ 
 })
 
 
@@ -395,34 +408,35 @@ inputSourse.addEventListener('change', () => {
 
 //get images Unsplash API
 
-let link;
+let linkFl;
+let linkUP;
 
 async function getLinkFromUnplash(){
+
   const url =
   `https://api.unsplash.com/photos/random?orientation=landscape&query=${theme}&client_id=lTc-IeTCFkte6_D0AMBniLBDzh4j3xtIaf0kkZiRFgU`
   const res = await fetch(url);
   const data = await res.json();
 
-  console.log(data.urls.regular);
-
-  return link = data.urls.regular;
+  return UPlink = data.urls.regular;
 }
 
 
 //get images Flickr API
 
 async function getLinkFromFlickr(){
+
   const url =
   `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=c597bbd8c655208791be3acdcfcb7433&tags=${theme}&extras=url_l&format=json&nojsoncallback=1`
   const res = await fetch(url);
   const data = await res.json();
-
-  let arrNum = getRandomNumber(1,data.photos.photo.length)
   
-  console.log(data.photos.photo[arrNum].url_l);
-
-  return link = data.photos.photo[arrNum].url_l;
+  return linkFl = data.photos.photo[getRandomNumber(0,20)].url_l;
+  
 }
+
+
+  
 
 
 //get images GitHub
@@ -433,23 +447,14 @@ function getRandomNumber(min, max){
 let bgNum = getRandomNumber(1,20).toString().padStart(2,'0');
 
 
-function getLinkFromGitHub(){
-link = `https://github.com/rolling-scopes-school/stage1-tasks/blob/assets/images/${timeOfDay}/${bgNum}.jpg?raw=true`
-console.log(link)
-return link
-}
-
-
-
 //change background
 
-function setBG(){
-
+function setBG(src=`https://github.com/rolling-scopes-school/stage1-tasks/blob/assets/images/${timeOfDay}/${bgNum}.jpg?raw=true`){
   const img = new Image();
-  img.src =  `https://github.com/rolling-scopes-school/stage1-tasks/blob/assets/images/${timeOfDay}/${bgNum}.jpg?raw=true`
+  img.src =  src
   img.onload = () => {      
   document.body.style.backgroundImage = 
-  'url(' + `https://github.com/rolling-scopes-school/stage1-tasks/blob/assets/images/${timeOfDay}/${bgNum}.jpg?raw=true` + ')'
+  'url(' + src + ')'
 }}
 
 setBG()
@@ -474,11 +479,15 @@ function getSlidePrev(){
 }
 
 function getSlideNext(){
+  
   bgNum = (Number(bgNum) + 1).toString().padStart(2,'0');
   if(bgNum === '21') bgNum = '01';
  
   setBG()
 }
+
+
+//AUDIOPLAYER
 
 
 
@@ -540,6 +549,8 @@ function changeLanguage(e){
    }
 
 }
+
+
 
 
 
