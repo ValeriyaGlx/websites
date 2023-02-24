@@ -172,7 +172,6 @@ console.log(volumeScore);
 const timeline = document.querySelector('.timeline');
 
 timeline.addEventListener('click', (e) => {
-  console.log(e.offsetX/2);
   const timeToSeek = e.offsetX / 200 * audio.duration;
   audio.currentTime = timeToSeek;
 })

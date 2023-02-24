@@ -159,6 +159,7 @@ if(hours >= 18 && hours < 24){greetConteiner.textContent = `Добрый веч�
 text.placeholder = '[Введите Имя]'
 } else {
   greetConteiner.textContent = `Good ${getTimeOfDay()},`;
+  text.placeholder = '[Enter Name]'
 }
 
 
@@ -487,9 +488,6 @@ function getSlideNext(){
 }
 
 
-//AUDIOPLAYER
-
-
 
 
 
@@ -560,6 +558,36 @@ function changeLanguage(e){
 
 //hide blocks 
 
+const settingList = document.querySelectorAll('label');
+const weather = document.querySelector('.weather');
+const player = document.querySelector('.player')
+
+const arrButt = [...settingList]
+const arr = [time, date, document.querySelector('.greeting-container'), weather, document.querySelector('.footer__quote'), todoOpen, player]
+
+
+settingList.forEach(el => el.addEventListener('change', (e)=>{
+   for(let i=0; i<arrButt.length; i++){ 
+    if(e.target.id==Object.keys(settingList)[i]){
+      arr[i].classList.toggle('hiddenBlock');
+    }
+  }
+
+}))
+
+//local storage with settings
+window.addEventListener('beforeunload', setLocalStorageSettings);
+window.addEventListener('load', getLocalStorageSettings);
+
+function setLocalStorageSettings(){
+  localStorage.setItem('settings', arrButt);
+}
+
+function getLocalStorageSettings(){
+  if(localStorage.getItem('settings')) {
+    arrButt = localStorage.getItem('settings');
+  }
+}
 
 
 
