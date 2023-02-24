@@ -759,6 +759,7 @@ color: #C5B358;
   background: #C5B358;
   height: 100%;
   width: 75%;
+  transition: all .3s;
 }
 
 .volume-button:hover{

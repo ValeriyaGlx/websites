@@ -1,23 +1,23 @@
 const playList = [
     {      
       title: 'Aqua Caelestis',
-      src: '../assets/sounds/Aqua Caelestis.mp3',
-      duration: '0:58'
+      src: './assets/sounds/Aqua Caelestis.mp3',
+      duration: '0:39'
     },  
     {      
       title: 'River Flows In You',
-      src: '../assets/sounds/River Flows In You.mp3',
-      duration: '3:50'
+      src: './assets/sounds/River Flows In You.mp3',
+      duration: '1:37'
     },
     {      
         title: 'Summer Wind',
-        src: '../assets/sounds/Summer Wind.mp3',
-        duration: '1:37'
+        src: './assets/sounds/Summer Wind.mp3',
+        duration: '1:50'
       },
     {      
         title: 'Ennio Morricone',
-        src: '../assets/sounds/Ennio Morricone.mp3',
-        duration: '1:50'
+        src: './assets/sounds/Ennio Morricone.mp3',
+        duration: '1:37'
       }
   ]
 
@@ -37,6 +37,8 @@ function playAudio() {
   audio.currentTime = 0;
   audio.volume = .75;
   audio.play();
+ 
+  
 }
 
 function pauseAudio() {
@@ -62,8 +64,12 @@ const playNext = document.querySelector('.play-next');
 
 function nextSong(){
 audioRoad[playNum].classList.remove('played-list__li');
-playNum++;
-console.log(playNum);
+if(playNum===3){
+  playNum = 0
+} else {
+  playNum++;
+}
+
 audioRoad[playNum].classList.add('played-list__li');
 playAudio();
 
@@ -73,7 +79,11 @@ if(!audioButt.classList.contains('pause')){
 }
 function prevSong(){
 audioRoad[playNum].classList.remove('played-list__li');
-playNum--;
+if(playNum===0){
+  playNum = 3;
+} else{
+  playNum--;
+}
     
 audioRoad[playNum].classList.add('played-list__li');
 playAudio();
@@ -88,15 +98,44 @@ playPrev.addEventListener('click', prevSong);
 
 //choose loud
 
-//mute
+//mute img
 
 const volume = document.querySelector('.volume-button');
 const volumeMedium = document.querySelector('.icono-volumeMedium');
+const volumePercentage = document.querySelector('.volume-percentage');
 
 function muteSound(){
-volumeMedium.classList.toggle('mute')
+volumeMedium.classList.toggle('mute');
+
+audio.muted = true;
+volumePercentage.style.width = '0%'
+if(!volumeMedium.classList.contains('mute')){
+  audio.muted = false;
+  volumePercentage.style.width = '75%'
+}
 }
 
-volume.addEventListener('click', muteSound)
+volume.addEventListener('click', muteSound);
+
+//current time
+
+const current = document.querySelector('.current')
+
+audio.addEventListener('timeupdate', () => {
+  const currentTime = Math.floor(audio.currentTime);
+  const duration = Math.floor(audio.duration);
+  
+  if(currentTime<60){
+    current.textContent = `0:${currentTime.toString().padStart(2,'0')}`;
+  }
+  if(currentTime>=60){
+  current.textContent = `1:${(currentTime - 60).toString().padStart(2,'0')}`;
+  }
+
+  if(audio.currentTime === audio.duration){
+    nextSong()
+  }
+  
+}, false);
 
 
