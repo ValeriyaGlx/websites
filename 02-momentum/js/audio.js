@@ -42,7 +42,6 @@ function playAudio() {
 }
 
 function pauseAudio() {
-isPlay = 0
   audio.pause();
 }
 
@@ -99,6 +98,7 @@ playPrev.addEventListener('click', prevSong);
 //choose loud
 
 //mute img
+let volumeScore = .75;
 
 const volume = document.querySelector('.volume-button');
 const volumeMedium = document.querySelector('.icono-volumeMedium');
@@ -111,7 +111,7 @@ audio.muted = true;
 volumePercentage.style.width = '0%'
 if(!volumeMedium.classList.contains('mute')){
   audio.muted = false;
-  volumePercentage.style.width = '75%'
+  volumePercentage.style.width = '75%';
 }
 }
 
@@ -119,11 +119,11 @@ volume.addEventListener('click', muteSound);
 
 //current time
 
-const current = document.querySelector('.current')
+const current = document.querySelector('.current');
+const progress = document.querySelector('.progress');
 
 audio.addEventListener('timeupdate', () => {
   const currentTime = Math.floor(audio.currentTime);
-  const duration = Math.floor(audio.duration);
   
   if(currentTime<60){
     current.textContent = `0:${currentTime.toString().padStart(2,'0')}`;
@@ -139,3 +139,40 @@ audio.addEventListener('timeupdate', () => {
 }, false);
 
 
+//running audio percentage
+setInterval(()=>{ progress.style.width = audio.currentTime / audio.duration * 100 + "%"}, 300)
+
+//click on volume slider
+const volumeSlider = document.querySelector('.volume-slider')
+
+volumeSlider.addEventListener('click', (e) =>{
+  audio.muted = false;
+
+  if(volumeMedium.classList.contains('mute')){
+    volumeMedium.classList.remove('mute');
+  }
+
+  volumePercentage.style.width = e.offsetX + '%';
+  audio.volume = e.offsetX/100
+
+  if(e.offsetX>=100){
+    audio.volume = 1
+  }
+
+  if(e.offsetX<=1){
+    audio.muted = true;
+    volumeMedium.classList.add('mute');
+  }
+  return volumeScore = audio.volume/100
+})
+
+console.log(volumeScore);
+
+//click on audio persentage
+const timeline = document.querySelector('.timeline');
+
+timeline.addEventListener('click', (e) => {
+  console.log(e.offsetX/2);
+  const timeToSeek = e.offsetX / 200 * audio.duration;
+  audio.currentTime = timeToSeek;
+})

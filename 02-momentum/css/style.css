@@ -684,7 +684,7 @@ color: #C5B358;
 .progress {
   background: #C5B358;
   border-top-left-radius: 10px;
-  width: 45%;
+  width: 0%;
   height: 100%;
   transition: 0.25s;
 }
