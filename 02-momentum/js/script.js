@@ -1,5 +1,4 @@
 
-
 //show time and date
 
 let lang = 'en'
@@ -45,7 +44,21 @@ const city = document.querySelector('.city');
 
 
 async function getWeather(lang){
-     //city.value = 'Minsk'
+  // local storage 
+
+  function setLocalStorage(){
+    localStorage.setItem('city', city.value);
+   
+  }
+  window.addEventListener('beforeunload', setLocalStorage);
+  
+  function getLocalStorageW(){
+    if(localStorage.getItem('city')) {
+      city.value = localStorage.getItem('city');
+    }
+  }
+  
+  window.addEventListener('load', getLocalStorageW);
   
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=${lang}&appid=5239ed5b9227a8753965552e1bdd125d&units=metric`;
     const response = await fetch(url);
@@ -67,26 +80,7 @@ async function getWeather(lang){
       humidity.textContent = `Humidity: ${data.main.humidity}%`;
     }
     
-   
-  
     city.value = data.name;
-
-
-
-     // local storage 
-
-  function setLocalStorage(){
-    localStorage.setItem('city', city.value);
-  }
-  window.addEventListener('beforeunload', setLocalStorage);
-  
-  function getLocalStorage(){
-    if(localStorage.getItem('city')) {
-      city.value = localStorage.getItem('city');
-    }
-  }
-  
-  window.addEventListener('load', getLocalStorage);
   }
   
   
@@ -99,7 +93,7 @@ city.addEventListener('change', getWeatherNew)
 async function getWeatherNew(){
   const weatherError = document.querySelector('.weather-error');
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=en&appid=5239ed5b9227a8753965552e1bdd125d&units=metric`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=${lang}&appid=5239ed5b9227a8753965552e1bdd125d&units=metric`;
   
   const response = await fetch(url);
   const data = await response.json();
@@ -111,8 +105,16 @@ async function getWeatherNew(){
   weatherIcon.classList.add(`owf-${data.weather[0].id}`)
   temperature.textContent = `${Math.ceil(data.main.temp)}°C`
   weatherDescription.textContent = data.weather[0].description;
-  wind.textContent = `Wind speed: ${Math.ceil(data.wind.speed)} m/s`;
-  humidity.textContent = `Humidity: ${data.main.humidity}%`;
+  if(lang='en'){
+    wind.textContent = `Wind speed: ${Math.ceil(data.wind.speed)} m/s`;
+    humidity.textContent = `Humidity: ${data.main.humidity}%`;
+  }
+  if(lang='ru'){
+    wind.textContent = `Скорость ветра: ${Math.ceil(data.wind.speed)} m/s`;
+    humidity.textContent = `Humidity: ${data.main.humidity}%`;
+  }
+
+ 
 
   
   city.value = data.name}
@@ -235,6 +237,8 @@ const settings = document.querySelector('.settings__main')
 footerSettings.addEventListener('click', () => {
   getLinkFromFlickr()
   getLinkFromUnplash()
+
+  window.addEventListener('click', closeSetWindow)
   
   if(settings.style.maxHeight){
     settings.style.padding = null;
@@ -247,9 +251,19 @@ footerSettings.addEventListener('click', () => {
     settings.style.padding =  20 + 'px';
     settings.style.maxHeight = 370 + 'px';
   }
-
-
 })
+
+function closeSetWindow(e){
+  const modal1 = e.composedPath().includes(settings);
+  const modal2 = e.composedPath().includes(footerSettings);
+  if (!modal1 && !modal2) {
+    settings.style.padding = null;
+    settings.style.maxHeight = null;
+    settings.style.visibility = 'hidden';
+    settings.style.opacity = 0;
+  }
+}
+
 
 
 //open and close todo window
@@ -260,8 +274,8 @@ const todoList = document.querySelector('.todo__list');
 const todoButton = document.querySelector('.todo__list--button');
 const todoInput = document.querySelector('.todo__input');
 
-const chatContainer = document.querySelector('.todo__task-field')
-const items = chatContainer.children
+const chatContainer = document.querySelector('.todo__task-field');
+const items = chatContainer.children;
 
 
 
@@ -284,7 +298,7 @@ if(items.length > 1){
  } else {
   todoList.style.padding = 20 + 'px';
   todoList.style.opacity = 1;
-  todoList.style.maxHeight = 260 + 'px';
+  todoList.style.maxHeight = 420 + 'px';
  }
 });
 
@@ -296,6 +310,7 @@ todoButton.addEventListener('click', () => {
   
   if(todoInput.style.opacity){
     todoInput.focus()
+
   }
 })
 
@@ -400,12 +415,14 @@ if(e.target.id==='flickr'){
 if(e.target.id==='unsplash'){
   inputSourse.value = ''
   if(!inputSourse.value){
-    setBG(UPlink);
+    setBG(linkUP);
   }
   inputSourse.addEventListener('change', changeTheme)
 }
 
 }
+
+let themeNew = timeOfDay
 
 function changeTheme(){
   themeNew = inputSourse.value;
@@ -414,7 +431,7 @@ function changeTheme(){
     getLinkFromFlickr(themeNew).finally(()=>{setBG(linkFl)}); 
   }
   if(document.getElementById('unsplash').classList.contains('button__active')){
-   getLinkFromUnplash(themeNew).finally(()=>{setBG(UPlink)}); 
+   getLinkFromUnplash(themeNew).finally(()=>{setBG(linkUP)}); 
   }
 }
 
@@ -425,20 +442,20 @@ function changeTheme(){
 let linkFl;
 let linkUP;
 
-async function getLinkFromUnplash(theme='nature'){
+async function getLinkFromUnplash(theme=timeOfDay){
 
   const url =
   `https://api.unsplash.com/photos/random?orientation=landscape&query=${theme}&client_id=lTc-IeTCFkte6_D0AMBniLBDzh4j3xtIaf0kkZiRFgU`
   const res = await fetch(url);
   const data = await res.json();
-
-  return UPlink = data.urls.regular;
+  
+  return linkUP = data.urls.regular;
 }
 
 
 //get images Flickr API
 
-async function getLinkFromFlickr(theme='nature'){
+async function getLinkFromFlickr(theme=timeOfDay){
 
   const url =
   `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=c597bbd8c655208791be3acdcfcb7433&tags=${theme}&extras=url_l&format=json&nojsoncallback=1`
@@ -486,18 +503,27 @@ rightIcon.addEventListener('click', getSlideNext);
 
 function getSlidePrev(){
 
-  bgNum = (Number(bgNum) - 1).toString().padStart(2,'0');
-  if(bgNum === '00') bgNum = '20';
-
-  setBG()
+  if(buttonSourse[2].classList.contains('button__active')){
+    getLinkFromFlickr(themeNew).finally(()=>{setBG(linkFl)}); 
+  } else if(buttonSourse[1].classList.contains('button__active')){
+    getLinkFromUnplash(themeNew).finally(()=>{setBG(linkUP)}); 
+  } else {
+    bgNum = (Number(bgNum) - 1).toString().padStart(2,'0');
+    if(bgNum === '00') bgNum = '20';
+    setBG()
+  }  
 }
 
 function getSlideNext(){
-  
+  if(buttonSourse[2].classList.contains('button__active')){
+    getLinkFromFlickr(themeNew).finally(()=>{setBG(linkFl)}); 
+  } else if(buttonSourse[1].classList.contains('button__active')){
+    getLinkFromUnplash(themeNew).finally(()=>{setBG(linkUP)}); 
+   } else {
   bgNum = (Number(bgNum) + 1).toString().padStart(2,'0');
   if(bgNum === '21') bgNum = '01';
- 
   setBG()
+  }
 }
 
 //change language
