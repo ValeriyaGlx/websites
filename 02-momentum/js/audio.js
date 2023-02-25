@@ -28,20 +28,24 @@ const audioName = document.querySelector('.player-name');
 const length = document.querySelector('.length');
 const audioRoad = document.querySelectorAll('.play-list__li');
 let playNum = 0;
+let curTime = 0;
 
 function playAudio() {
+  audio.addEventListener('timeupdate', () =>{
+    curTime = Math.round(audio.currentTime)
+  })
+
   audioName.textContent = playList[playNum].title;
   length.textContent = playList[playNum].duration;
 
   audio.src = playList[playNum].src;
-  audio.currentTime = 0;
+  audio.currentTime = curTime;
   audio.volume = .75;
   audio.play();
- 
-  
 }
 
 function pauseAudio() {
+
   audio.pause();
 }
 
@@ -166,7 +170,6 @@ volumeSlider.addEventListener('click', (e) =>{
   return volumeScore = audio.volume/100
 })
 
-console.log(volumeScore);
 
 //click on audio persentage
 const timeline = document.querySelector('.timeline');

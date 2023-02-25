@@ -119,6 +119,7 @@ async function getWeatherNew(){
  
   catch(e){
     if(e.name ==='TypeError'){
+      
     weatherError.textContent = `Error! city not found for ' ${city.value}'!`;
       temperature.textContent = null;
       weatherDescription.textContent = null;
@@ -233,7 +234,7 @@ const settings = document.querySelector('.settings__main')
 
 footerSettings.addEventListener('click', () => {
   getLinkFromFlickr()
-  //getLinkFromUnplash()
+  getLinkFromUnplash()
   
   if(settings.style.maxHeight){
     settings.style.padding = null;
@@ -368,8 +369,8 @@ const inputSourse = document.querySelector('.sourse__input')
 
 buttonSourse.forEach(el => el.addEventListener('click', chooseSourse));
 
+
 function chooseSourse(e){
-  console.log(e.target);
   const arr = []
   buttonSourse.forEach(el => el.classList.remove('button__active'));
 
@@ -379,7 +380,8 @@ function chooseSourse(e){
 
   if(e.target.id==='unsplash' || e.target.id==='flickr'){
     inputSourse.style.opacity = 1; 
-    inputSourse.focus()
+    inputSourse.focus();
+
   } else {
     inputSourse.style.opacity = 0
   }
@@ -388,31 +390,42 @@ if(e.target.id==='gitHub'){
 }
 
 if(e.target.id==='flickr'){
-  setBG(linkFl)
+  inputSourse.value = ''
+  if(!inputSourse.value){
+    setBG(linkFl);
+  } 
+  inputSourse.addEventListener('change', changeTheme);
 }
 
 if(e.target.id==='unsplash'){
-  setBG(UPlink)
+  inputSourse.value = ''
+  if(!inputSourse.value){
+    setBG(UPlink);
+  }
+  inputSourse.addEventListener('change', changeTheme)
 }
 
-
 }
 
-//input sourse
-let theme = 'nature'
-inputSourse.addEventListener('change', () => {
- 
-})
+function changeTheme(){
+  themeNew = inputSourse.value;
+
+  if(document.getElementById('flickr').classList.contains('button__active')){
+    getLinkFromFlickr(themeNew).finally(()=>{setBG(linkFl)}); 
+  }
+  if(document.getElementById('unsplash').classList.contains('button__active')){
+   getLinkFromUnplash(themeNew).finally(()=>{setBG(UPlink)}); 
+  }
+}
 
 
 
 
 //get images Unsplash API
-
 let linkFl;
 let linkUP;
 
-async function getLinkFromUnplash(){
+async function getLinkFromUnplash(theme='nature'){
 
   const url =
   `https://api.unsplash.com/photos/random?orientation=landscape&query=${theme}&client_id=lTc-IeTCFkte6_D0AMBniLBDzh4j3xtIaf0kkZiRFgU`
@@ -425,7 +438,7 @@ async function getLinkFromUnplash(){
 
 //get images Flickr API
 
-async function getLinkFromFlickr(){
+async function getLinkFromFlickr(theme='nature'){
 
   const url =
   `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=c597bbd8c655208791be3acdcfcb7433&tags=${theme}&extras=url_l&format=json&nojsoncallback=1`
@@ -487,10 +500,6 @@ function getSlideNext(){
   setBG()
 }
 
-
-
-
-
 //change language
 const buttLanguage = document.querySelectorAll('.lang__button');
 
@@ -508,7 +517,8 @@ function changeLanguage(e){
     lang = 'ru'
     document.querySelector('.language').textContent = 'Язык:';
     document.querySelector('.sourse').textContent = 'Источник изображения:';
-    document.querySelector('.article').textContent = 'Скрыть/Показать блок'
+    document.querySelector('.article').textContent = 'Скрыть/Показать блок';
+    inputSourse.placeholder = 'Выберите Тему';
 
   const arr = ['Время', 'Дата', 'Приветствие', 'Погода', 'Цитаты', 'Список дел', 'Аудио'];
   const newArr = [ ...document.querySelectorAll('.settings__span')];
@@ -530,7 +540,8 @@ function changeLanguage(e){
 
     document.querySelector('.language').textContent = 'Language:';
     document.querySelector('.sourse').textContent = 'Image Sourсe:';
-    document.querySelector('.article').textContent = 'Hide/Show Blocks:'
+    document.querySelector('.article').textContent = 'Hide/Show Blocks:';
+    inputSourse.placeholder = 'Pick a Тheme';
 
   const arr = ['Clock', 'Date', 'Greeting', 'Weather', 'Quotes', 'Todo', 'Audio'];
 
@@ -547,6 +558,8 @@ function changeLanguage(e){
    }
 
 }
+
+
 
 
 

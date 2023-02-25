@@ -328,6 +328,7 @@ li {
 
 .settings__main{
   position: absolute;
+  z-index: 5;
   bottom: 25px;
 
   overflow: hidden;
@@ -494,6 +495,7 @@ input:checked + .slider:before {
   margin-bottom: 20px;
 
   position: absolute;
+  z-index: 5;
   bottom: 25px;
   
   transition: all 0.3s ease-in-out;
