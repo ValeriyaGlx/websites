@@ -687,6 +687,7 @@ color: #C5B358;
   bottom: 5px;
   cursor: pointer;
   box-shadow: 0 2px 10px 0 #0008;
+  
 }
 
 .progress {
@@ -758,9 +759,9 @@ color: #C5B358;
   right:20px;
   bottom: 16px;
   z-index: 5;
-  
   cursor: pointer;
   box-shadow: 0 2px 10px 0 #0008;
+  transition: all .4s;
 }
 
 .volume-percentage {

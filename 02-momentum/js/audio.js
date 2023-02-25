@@ -45,14 +45,13 @@ function playAudio() {
 }
 
 function pauseAudio() {
-
   audio.pause();
 }
 
 function toggleBtn() {
     audioButt.classList.toggle('pause');
     audioRoad[playNum].classList.add('played-list__li');
-
+    
     playAudio();
 
     if(!audioButt.classList.contains('pause')){
@@ -66,6 +65,7 @@ const playPrev = document.querySelector('.play-prev');
 const playNext = document.querySelector('.play-next');
 
 function nextSong(){
+curTime = 0;
 audioRoad[playNum].classList.remove('played-list__li');
 if(playNum===3){
   playNum = 0
@@ -81,6 +81,7 @@ if(!audioButt.classList.contains('pause')){
 }
 }
 function prevSong(){
+curTime = 0;
 audioRoad[playNum].classList.remove('played-list__li');
 if(playNum===0){
   playNum = 3;

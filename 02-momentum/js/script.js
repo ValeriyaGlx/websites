@@ -505,6 +505,8 @@ const buttLanguage = document.querySelectorAll('.lang__button');
 
 buttLanguage.forEach(el => el.addEventListener('click', changeLanguage));
 
+let Rus = false
+
 function changeLanguage(e){
   const arr = [];
   buttLanguage.forEach(el => el.classList.remove('button__active'));
@@ -514,6 +516,8 @@ function changeLanguage(e){
 
 
   if(e.target.id==='ru'){
+   Rus = true
+
     lang = 'ru'
     document.querySelector('.language').textContent = 'Язык:';
     document.querySelector('.sourse').textContent = 'Источник изображения:';
@@ -531,12 +535,13 @@ function changeLanguage(e){
   getWeather('ru');
   getQuotes('ru');
   showDate('ru');
-  showGreeting('ru')
+  showGreeting('ru');
   
 
 
    } else {
-    lang = 'en'
+    lang = 'en';
+    Rus = false;
 
     document.querySelector('.language').textContent = 'Language:';
     document.querySelector('.sourse').textContent = 'Image Sourсe:';
@@ -563,12 +568,6 @@ function changeLanguage(e){
 
 
 
-
-
-
-
-
-
 //hide blocks 
 
 const settingList = document.querySelectorAll('label');
@@ -576,31 +575,67 @@ const weather = document.querySelector('.weather');
 const player = document.querySelector('.player')
 
 const arrButt = [...settingList]
-const arr = [time, date, document.querySelector('.greeting-container'), weather, document.querySelector('.footer__quote'), todoOpen, player]
+const arr = [time, date, document.querySelector('.greeting-container'), weather, document.querySelector('.footer__quote'), todoOpen, player];
+
+const boolArr = [true, true, true, true, true, true, true,];
 
 
-settingList.forEach(el => el.addEventListener('change', (e)=>{
-   for(let i=0; i<arrButt.length; i++){ 
-    if(e.target.id==Object.keys(settingList)[i]){
-      arr[i].classList.toggle('hiddenBlock');
+settingList.forEach(el => el.addEventListener('change', settingsClass))
+
+function settingsClass(e) {
+  for(let i=0; i<arrButt.length; i++){ 
+   if(e.target.id==Object.keys(settingList)[i]){
+     arr[i].classList.toggle('hiddenBlock');
+
+     boolArr[i]=false
+     if(!arr[i].classList.contains('hiddenBlock')){
+       boolArr[i] = true
+     }
+   }
+ }
+
+}
+
+// save settings after load
+
+function settingsAfterLoad(){
+  for(let i=0; i<arrButt.length; i++){
+    if(boolArr[i]==='false'){
+      arrButt[i].click()
     }
   }
-
-}))
+ if(Rus==='true'){
+  buttLanguage[1].click()
+ }
+}
 
 //local storage with settings
-window.addEventListener('beforeunload', setLocalStorageSettings);
-window.addEventListener('load', getLocalStorageSettings);
 
-function setLocalStorageSettings(){
-  localStorage.setItem('settings', arrButt);
-}
-
-function getLocalStorageSettings(){
-  if(localStorage.getItem('settings')) {
-    arrButt = localStorage.getItem('settings');
+window.addEventListener('beforeunload', setSettings);
+  
+function setSettings(){
+  localStorage.setItem('isTime', boolArr[0]);
+  localStorage.setItem('isDate', boolArr[1]);
+  localStorage.setItem('isGreet', boolArr[2]);
+  localStorage.setItem('isWeath', boolArr[3]);
+  localStorage.setItem('isQuot', boolArr[4]);
+  localStorage.setItem('isTodo', boolArr[5]);
+  localStorage.setItem('isPlayer', boolArr[6]);
+  localStorage.setItem('Lang', Rus);
   }
-}
 
+  window.addEventListener('load', getSettings);
 
-
+    function getSettings(){
+    boolArr[0] = localStorage.getItem('isTime');
+    boolArr[1] = localStorage.getItem('isDate');
+    boolArr[2] = localStorage.getItem('isGreet');
+    boolArr[3] = localStorage.getItem('isWeath');
+    boolArr[4] = localStorage.getItem('isQuot');
+    boolArr[5] = localStorage.getItem('isTodo');
+    boolArr[6] = localStorage.getItem('isPlayer');
+    Rus = localStorage.getItem('Lang')
+    settingsAfterLoad()
+  } 
+  
+ 
