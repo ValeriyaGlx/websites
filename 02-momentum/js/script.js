@@ -19,7 +19,7 @@ const date = document.querySelector('.date');
 showTime()
 
    function showDate(lang){
-    const options = {weekday: 'long', month: 'long', day: 'numeric'};
+    const options = {hour12: false, weekday: 'long', month: 'long', day: 'numeric'};
     let locals;
 
     if(lang==='en'){
@@ -71,7 +71,6 @@ async function getWeather(lang){
     weatherDescription.textContent = data.weather[0].description;
 
     if(lang=='ru'){
-      
       wind.textContent = `Скорость ветра: ${Math.ceil(data.wind.speed)} m/s`;
       humidity.textContent = `Влажность: ${data.main.humidity}%`;
       city.placeholder = '[Введите город]'
