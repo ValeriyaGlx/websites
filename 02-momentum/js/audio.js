@@ -107,12 +107,13 @@ audioRoad.forEach(el => el.addEventListener('click',(e)=> {
   if(el.classList.contains('played-list__li')){
     el.classList.remove('played-list__li');
     audioButt.classList.remove('pause'); 
+    //audioName.textContent = null;
     return audio.pause();
 }
 
   audioRoad.forEach(el => el.classList.remove('played-list__li'))
   el.classList.add('played-list__li');
-  audioName.textContent = playList[playNum].title;
+  audioName.textContent = Object.values(playList)[e.target.id*1].title;
   audioButt.classList.add('pause');
   audio.src = Object.values(playList)[e.target.id*1].src;
   audio.play();
