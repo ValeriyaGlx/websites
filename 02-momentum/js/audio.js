@@ -49,6 +49,7 @@ function pauseAudio() {
 }
 
 function toggleBtn() {
+  audioRoad.forEach(el => el.classList.remove('paused-list__li'))
     audioRoad.forEach(el => el.classList.remove('played-list__li'))
     audioButt.classList.toggle('pause');
     audioRoad[playNum].classList.add('played-list__li');
@@ -57,6 +58,7 @@ function toggleBtn() {
 
     if(!audioButt.classList.contains('pause')){
         pauseAudio()
+        audioRoad[playNum].classList.add('paused-list__li')
     }
   }
 audioButt.addEventListener('click', toggleBtn);
@@ -67,6 +69,7 @@ const playNext = document.querySelector('.play-next');
 
 function nextSong(){
 curTime = 0;
+audioRoad.forEach(el => el.classList.remove('paused-list__li'))
 audioRoad[playNum].classList.remove('played-list__li');
 if(playNum===3){
   playNum = 0
@@ -83,6 +86,7 @@ if(!audioButt.classList.contains('pause')){
 }
 function prevSong(){
 curTime = 0;
+audioRoad.forEach(el => el.classList.remove('paused-list__li'))
 audioRoad[playNum].classList.remove('played-list__li');
 if(playNum===0){
   playNum = 3;
@@ -102,23 +106,36 @@ playNext.addEventListener('click', nextSong);
 playPrev.addEventListener('click', prevSong);
 
 //choose track
+
 audioRoad.forEach(el => el.addEventListener('click',(e)=> {
+
+  audio.addEventListener('timeupdate', () =>{
+    curTime = Math.round(audio.currentTime)})
+    audio.currentTime = curTime;
+ 
 
   if(el.classList.contains('played-list__li')){
     el.classList.remove('played-list__li');
+    el.classList.add('paused-list__li');
     audioButt.classList.remove('pause'); 
-    //audioName.textContent = null;
     return audio.pause();
-}
-
+   }
+  
   audioRoad.forEach(el => el.classList.remove('played-list__li'))
+  audioRoad.forEach(el => el.classList.remove('paused-list__li'))
   el.classList.add('played-list__li');
   audioName.textContent = Object.values(playList)[e.target.id*1].title;
   audioButt.classList.add('pause');
   audio.src = Object.values(playList)[e.target.id*1].src;
-  audio.play();
-
- return playNum = e.target.id*1
+ 
+  
+  if(playNum !== e.target.id*1){
+    audio.currentTime = 0;
+  }
+  playNum = e.target.id*1
+  
+  audio.play()
+ return playNum
 }))
 
 //mute img

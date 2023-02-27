@@ -651,6 +651,12 @@ opacity: 1;
 color: #C5B358;
 }
 
+.paused-list__li{
+  font-weight: 100;
+  opacity: 1;
+  color: #757064;
+  }
+
 
 .play-list__li:hover{
   opacity: 1;
