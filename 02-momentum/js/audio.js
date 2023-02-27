@@ -117,7 +117,7 @@ audioRoad.forEach(el => el.addEventListener('click',(e)=> {
   audio.src = Object.values(playList)[e.target.id*1].src;
   audio.play();
 
- 
+ return playNum = e.target.id*1
 }))
 
 //mute img
