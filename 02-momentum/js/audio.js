@@ -49,6 +49,7 @@ function pauseAudio() {
 }
 
 function toggleBtn() {
+    audioRoad.forEach(el => el.classList.remove('played-list__li'))
     audioButt.classList.toggle('pause');
     audioRoad[playNum].classList.add('played-list__li');
     
@@ -100,7 +101,16 @@ if(!audioButt.classList.contains('pause')){
 playNext.addEventListener('click', nextSong);
 playPrev.addEventListener('click', prevSong);
 
-//choose loud
+//choose track
+audioRoad.forEach(el => el.addEventListener('click',(e)=> {
+  audioRoad.forEach(el => el.classList.remove('played-list__li'))
+  el.classList.add('played-list__li');
+  audioName.textContent = playList[playNum].title;
+  audioButt.classList.add('pause');
+  curTime = 0;
+  audio.src = Object.values(playList)[e.target.id*1].src;
+  audio.play();
+}))
 
 //mute img
 let volumeScore = .75;
