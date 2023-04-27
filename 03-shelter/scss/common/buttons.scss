@@ -1,0 +1,142 @@
+@import "./extends.scss";
+@import "./variables.scss";
+
+.not-only--right__button{
+    @extend %button;
+    @extend %transition;
+    margin-top: 42px;
+
+&:hover{
+background-color: $color-nude_hover;
+    }
+
+    @media screen and (max-width: 1111px) {
+        display: block;
+        margin: 42px auto 0;
+        margin-left: 154px - 30px;
+    }
+
+    @media screen and (max-width: 740px) {
+        margin-left: auto;
+        margin-bottom: 4px;
+    }
+}
+
+.card--info__button{
+    @extend %button-withou-bg;
+    @extend %transition;
+    margin-top: 42px;
+    display: block;
+    margin: 30px auto;
+
+ &:hover{
+    background-color: $color-nude_hover;
+    }
+
+    @media screen and (max-width: 1111px) {
+        margin-top: 32px;
+    }
+}
+
+.our-friends__arrow{
+    @extend %button-circle;
+    @extend %transition;
+    position: relative;
+
+    img{
+     position: relative;
+     bottom:3%;
+    }
+
+    &:hover{
+        background-color: $color-nude_hover;
+            }
+    &:nth-child(5){
+        img{
+            transform: rotate(180deg)
+        }
+    }
+}
+
+.our-friends__button{
+    @extend %button;
+    @extend %transition;
+    display: block;
+    margin: 60px auto 0px;
+
+    &:hover{
+        background-color: $color-nude_hover;
+            }
+
+            @media screen and (max-width: 502px) {
+                margin-top: 42px;
+            }
+}
+
+.card-account{
+    margin-top: 20px;
+
+    cursor: pointer;
+    @extend %transition;
+    border: none;
+    background-color: $color-nude_normal;
+    padding: 10px 14px;
+    border-radius: 9px;
+
+    display: flex;
+    text-align: center;
+
+    @extend %h4;
+
+    &:hover{
+        background-color: $color-nude_hover;
+    }
+
+
+    img{
+        margin-right: 15px;
+    }
+}
+
+
+//PETS
+.PETS-our-friends-buttons{
+    button{
+        display: inline-block;
+        @extend %button-circle;
+        @extend %transition;
+    }
+    button +  button{
+        margin-left: 17.5px;
+    }
+
+    .number{
+        background-color: $color-nude_hover;
+        cursor: default;
+    }
+
+    .right:hover{
+        background-color: $color-nude_hover;
+    }
+
+    .left{
+        color: $color-dark-s;
+        border-color: $color-dark-s;
+    }
+
+    @media screen and (max-width: 740px){
+        button +  button{
+            margin-left: 5px;
+        }
+    }
+}
+
+//POPUP
+.popup-close{
+    @extend %transition;
+    @extend %button-circle;
+
+    &:hover{
+        background-color: $color-nude_hover;
+    }
+}

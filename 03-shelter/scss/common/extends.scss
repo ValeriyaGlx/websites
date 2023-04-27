@@ -1,0 +1,119 @@
+@import "./variables.scss";
+
+%h2{
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 130%;
+    color: $color-light-xl;
+}
+
+%h3{
+    font-family: 'Georgia';
+    font-style: normal;
+font-weight: 400;
+font-size: 35px;
+line-height: 130%;
+/* or 45px */
+letter-spacing: 0.06em;
+}
+
+%h4{
+font-family: 'Georgia';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 115%;
+/* identical to box height, or 23px */
+letter-spacing: 0.06em;
+}
+
+%h5{
+font-family: 'Georgia';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 110%;
+letter-spacing: 0.06em;
+}
+
+%paragraph-L{
+font-family: 'Arial';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 160%;
+/* identical to box height, or 24px */
+}
+
+%paragraph-S{
+font-family: 'Arial';
+font-style: italic;
+font-weight: 400;
+font-size: 12px;
+line-height: 150%;
+/* identical to box height, or 18px */
+}
+
+%font-georgian{
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+}
+
+%flex-between{
+    display: flex;
+    justify-content: space-between;
+}
+
+%button{
+cursor: pointer;
+border: none;
+padding: 15px 45px;
+border-radius: 100px;
+background-color: $color-nude_normal;
+font-family: 'Georgia';
+font-style: normal;
+font-weight: 400;
+font-size: 17px;
+line-height: 130%;
+letter-spacing: 0.06em;
+}
+
+%button-withou-bg{
+    cursor: pointer;
+    border: 2px solid $color-nude_hover;
+    padding: 14px 44px;
+    border-radius: 100px;
+    background: none;
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 130%;
+    letter-spacing: 0.06em;
+    }
+
+%button-circle{
+cursor: pointer;
+width: 52px;
+height: 52px;
+border: 3px solid #FDDCC4;
+border-radius: 100px;
+background: none;
+}
+
+%transition{
+    transition: all .3s ease-in-out;
+}
+
+%h3-mobile{
+    font-family: 'Georgia';
+font-style: normal;
+font-weight: 400;
+font-size: 25px;
+line-height: 130%;
+text-align: center;
+letter-spacing: 0.06em;
+}

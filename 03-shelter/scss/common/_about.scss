@@ -1,0 +1,84 @@
+@import "./extends.scss";
+@import "./variables.scss";
+
+.about {
+  margin-top: 80px;
+  margin-bottom: 100px;
+  margin-left: 215px - 40px;
+  margin-right: 215px - 40px;
+  @extend %flex-between;
+
+  @media screen and (max-width: 1111px) {
+    margin-top: 83px;
+    flex-direction: column-reverse;
+    margin-left: 169px - 30px;
+    margin-right: 169px - 30px;
+  }
+
+  @media screen and (max-width: 740px) {
+    margin-top: 45px;
+    margin-bottom: 42px;
+    margin-left: 25px - 10px;
+    margin-right: 25px - 10px;
+  }
+}
+
+.about--left {
+  margin-right: 120px;
+
+  @media screen and (max-width: 1111px) {
+    margin-right: 0;
+    margin-top: 80px;
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
+  @media screen and (max-width: 740px) {
+    margin-top: 42px;
+    img {
+      width: 260px;
+    }
+  }
+}
+
+.about-right {
+  margin-top: 94px - 80px;
+
+  p {
+    text-align: start;
+    margin-top: 25px;
+    @extend %paragraph-L;
+    color: $color-dark-xl;
+  }
+
+  @media screen and (max-width: 1111px) {
+    margin-top: 0;
+  }
+
+  @media screen and (max-width: 740px) {
+    .about-right__inner {
+      font-family: "Georgia";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 25px;
+      line-height: 130%;
+      text-align: center;
+      letter-spacing: 0.06em;
+    }
+
+    p {
+      text-align: justify;
+    }
+
+    p + p {
+      margin-top: 20px;
+    }
+  }
+}
+
+.about-right__inner {
+  @extend %h3;
+  color: $color-dark-l;
+}

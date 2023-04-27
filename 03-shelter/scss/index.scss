@@ -1,0 +1,74 @@
+body{
+    width: 100%;
+    max-width: 100%;
+    overflow-x:hidden;
+}
+
+*, *::after, *::before{
+    box-sizing: border-box;
+    margin: 0;
+	padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+  }
+
+li{
+    list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+.locker{
+    overflow: hidden;
+}
+
+.locker2{
+    overflow: hidden;
+}
+
+.main {
+    margin: 0 auto;
+  }
+.main-background {
+    background: url(../assets/img/header-background.png);
+    background-size: cover;
+}
+.container{
+max-width: 1280px;
+margin: 0 auto;
+padding: 0 40px;
+
+@media screen and (max-width: 1111px) {
+    padding: 0 30px;
+}
+
+@media screen and (max-width: 740px) {
+    padding: 0 10px;
+}
+}
+
+.container{
+    h3{
+        @media screen and (max-width: 740px) {
+                font-family: 'Georgia';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 25px;
+                line-height: 130%;
+                text-align: center;
+                letter-spacing: 0.06em;}
+    }
+}
+
+@import "./common/header";
+@import "./common/buttons.scss";
+@import "./common/not-only";
+@import "./common/about";
+@import "./common/our_friends";
+@import "./common/help";
+@import "./common/in-addition";
+@import "./common/footer";
