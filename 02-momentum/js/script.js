@@ -16,7 +16,7 @@ const date = document.querySelector('.date');
     
     showDate(lang);
   }
-showTime()
+showTime();
 
    function showDate(lang){
     const options = {hour12: false, weekday: 'long', month: 'long', day: 'numeric'};
@@ -28,7 +28,7 @@ showTime()
     if(lang==='ru'){
       locals = "ru-RU"
     }
-    
+
     const currentDate = new Date().toLocaleDateString(locals, options);
     date.textContent = currentDate;  
    }
